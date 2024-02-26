@@ -1,0 +1,28 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ 
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ 
+.title {
+    font-size: 24px;
+    margin-bottom: 10px; /* Abstand zwischen Titel und Kästchen */
+}
+ 
+ 
+input[type="text"] {
+    width: 80%; /* Breite des Eingabefelds */
+    padding: 10px; /* Innenabstand des Eingabefelds */
+    font-size: 16px; /* Schriftgröße des Eingabefelds */
+}
