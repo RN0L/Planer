@@ -30,33 +30,33 @@ def get_data():
 
 
 
-# Eintragen Kalender
-@app.route('/')
-def newsletter():
-    data = get_data()
-    return render_template('main.html', data = data)
+    # Eintragen Kalender
+    @app.route('/')
+    def newsletter():
+        data = get_data()
+        return render_template('main.html', data = data)
 
-# Forms für Datenbank Eintragen Kalender
-@app.route('/submit1', methods=['POST','GET'])
-def submit1():
-        if request.method == 'POST':
-            title = request.form['name']
-            content = request.form['email']
+    # Forms für Datenbank Eintragen Kalender
+    @app.route('/submit1', methods=['POST','GET'])
+    def submit1():
+            if request.method == 'POST':
+                title = request.form['name']
+                content = request.form['email']
 
-            # Datenbankverbindung herstellen
-            conn = connect_db()
-            cursor = conn.cursor()
+                # Datenbankverbindung herstellen
+                conn = connect_db()
+                cursor = conn.cursor()
 
-            # SQL-Befehl zum Einfügen von Daten
-            cursor.execute("INSERT INTO kalender (Ereignis, Beschreinung, Priorisiert, Fertig, Datum) VALUES (?, ?, ?, ?, ?)", (ereignis, beschreibung, priorisiert, fertig, datum))
+                # SQL-Befehl zum Einfügen von Daten
+                cursor.execute("INSERT INTO kalender (Ereignis, Beschreinung, Priorisiert, Fertig, Datum) VALUES (?, ?, ?, ?, ?)", (ereignis, beschreibung, priorisiert, fertig, datum))
 
-            # Änderungen in der Datenbank speichern
-            conn.commit()
+                # Änderungen in der Datenbank speichern
+                conn.commit()
 
-            # Datenbankverbindung schließen
-            conn.close()
-            print(title, content, 'wurden in der Datenbank gespeichert')
-            return redirect('/')
+                # Datenbankverbindung schließen
+                conn.close()
+                print(title, content, 'wurden in der Datenbank gespeichert')
+                return redirect('/')
 
 
 
@@ -75,26 +75,26 @@ def newsletter():
     return render_template('login.html', data = data)
 
 # Forms für Datenbank Anmeldung/ Newsletter
-@app.route('/submit2', methods=['POST','GET'])
-def submit2():
-        if request.method == 'POST':
-            title = request.form['name']
-            content = request.form['email']
+    @app.route('/submit2', methods=['POST','GET'])
+    def submit2():
+            if request.method == 'POST':
+                title = request.form['name']
+                content = request.form['email']
 
-            # Datenbankverbindung herstellen
-            conn = connect_db()
-            cursor = conn.cursor()
+                # Datenbankverbindung herstellen
+                conn = connect_db()
+                cursor = conn.cursor()
 
-            # SQL-Befehl zum Einfügen von Daten
-            cursor.execute("INSERT INTO login (name, Passwort) VALUES (?, ?)", (name, passwort))
+                # SQL-Befehl zum Einfügen von Daten
+                cursor.execute("INSERT INTO login (name, Passwort) VALUES (?, ?)", (name, passwort))
 
-            # Änderungen in der Datenbank speichern
-            conn.commit()
+                # Änderungen in der Datenbank speichern
+                conn.commit()
 
-            # Datenbankverbindung schließen
-            conn.close()
-            print(title, content, 'wurden in der Datenbank gespeichert')
-            return redirect('/login')
+                # Datenbankverbindung schließen
+                conn.close()
+                print(title, content, 'wurden in der Datenbank gespeichert')
+                return redirect('/login')
 
 
 
