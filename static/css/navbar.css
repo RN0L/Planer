@@ -8,8 +8,8 @@
     
 }
 :root{
-    --bg-color: #222327;
-    --text-color: #fff;
+    --bg-color: #ffffff;
+    --text-color: rgb(0, 0, 0);
     --main-color: #29fd53;
 }
 body{
