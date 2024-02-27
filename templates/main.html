@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename= 'static/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.css') }}">
     <title>Kalender</title>
 </head>
 <body>
@@ -12,15 +12,31 @@
         <table class='table table-info'>
             <thead class="thead-dark">
                 <tr>
-                    <th>Title</th>
-                    <th>Content</th>
+                    <th>Fertig</th>
+                    <th>Ereignis</th>
+                    <th>Datum</th>
+                    <th>Priorität</th>
                 </tr>
             </thead>
             <tbody>
                 {% for row in data %}
                 <tr>
+                    <td>
+                        {% if row[4] == 1 %}
+                            <input type="checkbox" checked>
+                        {% else %}
+                            <input type="checkbox">
+                        {% endif %}
+                    </td>
                     <td>{{ row[1] }}</td>
-                    <td>{{ row[2] }}</td>
+                    <td>{{ row[5] }}</td>
+                    <td>
+                        {% if row[3] == 1 %}
+                            <input type="checkbox" checked>
+                        {% else %}
+                            <input type="checkbox">
+                        {% endif %}
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
