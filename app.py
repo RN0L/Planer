@@ -32,7 +32,7 @@ def get_data():
 
     # Eintragen Kalender
     @app.route('/')
-    def newsletter():
+    def eintragen():
         data = get_data()
         return render_template('main.html', data = data)
 
@@ -61,7 +61,11 @@ def get_data():
 
 
 
-
+# login
+@app.route('/navbar')
+def navbar():
+    data = get_data()
+    return render_template('navbar.html', data = data)
 
 
 
@@ -75,8 +79,8 @@ def newsletter():
     return render_template('login.html', data = data)
 
 # Forms für Datenbank Anmeldung/ Newsletter
-    @app.route('/submit2', methods=['POST','GET'])
-    def submit2():
+@app.route('/submit2', methods=['POST','GET'])
+def submit2():
             if request.method == 'POST':
                 title = request.form['name']
                 content = request.form['email']
