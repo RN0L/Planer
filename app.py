@@ -61,7 +61,11 @@ def get_data():
 
 
 
-
+# login
+@app.route('/navbar')
+def newsletter():
+    data = get_data()
+    return render_template('navbar.html', data = data)
 
 
 
