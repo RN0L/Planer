@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.css')
+}}"> 
+    <title>Kalender</title>
+</head>
+<body>
+    <br>
+<!-- Tabelle mit den Datensätzen aus database.db noch nicht funktional, datensätze werden nicht angezeigt-->    
+   
+    <h1>Kalender
+    </h1>
+    <br>
+    <table class='table table-info'>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
