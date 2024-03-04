@@ -96,7 +96,7 @@ def submit2():
                 cursor = conn.cursor()
 
                 # SQL-Befehl zum Einfügen von Daten
-                cursor.execute("INSERT INTO login (name, Passwort) VALUES (?, ?)", (name, passwort))
+                cursor.execute("INSERT INTO login (name, passwort) VALUES (?, ?)", ("name", "pAssword"))
 
                 # Änderungen in der Datenbank speichern
                 conn.commit()
