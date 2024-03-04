@@ -9,38 +9,33 @@
     <div class="container">
         <h1 class="display-4">Kalender</h1>
         <br>
-        <table class='table table-info'>
-            <thead class="thead-dark">
-                <tr>
-                    <th>Fertig</th>
-                    <th>Ereignis</th>
-                    <th>Datum</th>
-                    <th>Priorität</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for row in data %}
-                <tr>
-                    <td>
-                        {% if row[4] == 1 %}
-                            <input type="checkbox" checked>
-                        {% else %}
-                            <input type="checkbox">
-                        {% endif %}
-                    </td>
-                    <td>{{ row[1] }}</td>
-                    <td>{{ row[5] }}</td>
-                    <td>
-                        {% if row[3] == 1 %}
-                            <input type="checkbox" checked>
-                        {% else %}
-                            <input type="checkbox">
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <form action="/save_changes" method="post">
+            <table class='table table-info'>
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Fertig</th>
+                        <th>Ereignis</th>
+                        <th>Datum</th>
+                        <th>Priorität</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="fertig[]" value="{{ row[0] }}" {% if row[4] == 1 %} checked {% endif %}>
+                        </td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[5] }}</td>
+                        <td>
+                            <input type="checkbox" name="prioritaet[]" value="{{ row[0] }}" {% if row[3] == 1 %} checked {% endif %}>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">Änderungen speichern</button>
+        </form>
     </div>
 </body>
 </html>
