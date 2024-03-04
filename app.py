@@ -68,6 +68,12 @@ def navbar():
     return render_template('navbar.html', data = data)
 
 
+@app.route('/hinzufügen')
+def hinzufügen():
+    data = get_data()
+    return render_template('hinzufügen.html', data = data)
+
+
 
 
 
