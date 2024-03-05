@@ -13,8 +13,10 @@ def connect_db():
 
 
 # Hauptseite Kalender
-@app.route('/')
+@app.route('/',methods=['POST','GET'])
 def index():
+    if request.method == 'POST':
+         prio=request.form['priorisiert']
     data = get_data()
     return render_template('main.html', data = data)
 
@@ -30,33 +32,31 @@ def get_data():
 
 
 
-    # Eintragen Kalender
-    @app.route('/')
-    def eintragen():
-        data = get_data()
-        return render_template('main.html', data = data)
 
-    # Forms für Datenbank Eintragen Kalender
-    @app.route('/submit1', methods=['POST','GET'])
-    def submit1():
-            if request.method == 'POST':
-                title = request.form['name']
-                content = request.form['email']
+    # Verändern main seite 
+@app.route('/submit1', methods=['POST'])
+def submit1():
+    if request.method == 'POST':
+        fertig = request.form.get('fertig') == 'on'  # Wenn das Kontrollkästchen ausgewählt wurde, wird 'on' gesendet
+        priorisiert = request.form.get('priorisiert') == 'on'
 
-                # Datenbankverbindung herstellen
-                conn = connect_db()
-                cursor = conn.cursor()
+        # Datenbankverbindung herstellen
+        conn = connect_db()
+        cursor = conn.cursor()
 
-                # SQL-Befehl zum Einfügen von Daten
-                cursor.execute("INSERT INTO kalender (Ereignis, Beschreinung, Priorisiert, Fertig, Datum) VALUES (?, ?, ?, ?, ?)", (ereignis, beschreibung, priorisiert, fertig, datum))
+        # SQL-Befehl zum Aktualisieren der Daten
+        cursor.execute("UPDATE kalender SET Priorisiert = ?, Fertig = ? WHERE ID = ?", (priorisiert, fertig, id))
 
-                # Änderungen in der Datenbank speichern
-                conn.commit()
+        # Änderungen in der Datenbank speichern
+        conn.commit()
 
-                # Datenbankverbindung schließen
-                conn.close()
-                print(title, content, 'wurden in der Datenbank gespeichert')
-                return redirect('/')
+        # Datenbankverbindung schließen
+        conn.close()
+        
+        print('Änderungen in der Datenbank gespeichert')
+        return redirect('/')
+
+
 
 
 
