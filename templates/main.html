@@ -3,47 +3,42 @@
  
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="../static/css/navbar.css">
-   
-        <link
-        href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
-        rel="stylesheet"/>
-   
-        <link rel="stylesheet"
-        href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-   
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.css') }}">
         <title>Kalender</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.css') }}">
+
     </head>
-    <body>
- 
-        <header>
-            <a href="#" class="logo"><i class="ri-home-smile-fill"></i>
-                <img src="Logo.JPG" alt="Logo" width="400px" >
-            </a>
-   
-            <ul class="navbar">
-                <li><a href="#" class="active">Kalender</a></li>
-                <li><a href="#">Impressum</a></li>
-                <li><a href="#">Hinzufügen</a></li>
-            </ul>
-   
-            <div class="main">
-                <i class="ri-user-fill"></i><a href="#"class="user">login </a>
-                <div class="bx bx-menu" id="menu-icon"></div>
-            </div>
-        </header>
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.css') }}">
-    <title>Kalender</title>
-</head>
 <body>
+
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+                <img src="static/images/Logo.png" alt="Logo" style="height: 40px;"> 
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Kalender
+                  <span class="visually-hidden">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="hinzufügen">Hinzufügen</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about">Impressum</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+
     <br>
     <div class="container">
         <h1 class="display-4">Kalender</h1>

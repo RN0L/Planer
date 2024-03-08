@@ -63,7 +63,10 @@ def hinzufügen():
     return render_template('hinzufügen.html', data = data)
 
 
-
+@app.route('/about')
+def about():
+    data = get_data()
+    return render_template('about.html', data = data)
 
 
 
