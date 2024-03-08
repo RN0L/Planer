@@ -20,7 +20,7 @@ def index():
     data = get_data()
     return render_template('main.html', data = data)
 
-# Daten aus der Datenbank abrufen Hauptseite
+# Daten aus der Datenbank abrufen Hauptseite Kalender tabelle
 def get_data():
     conn = connect_db()
     cursor = conn.cursor()
@@ -29,11 +29,7 @@ def get_data():
     conn.close()
     return data
 
-
-
-
-
-    # Verändern main seite 
+# Verändern main seite für Checkboxes Kalender
 @app.route('/submit1', methods=['POST'])
 def submit1():
     if request.method == 'POST':
@@ -61,13 +57,6 @@ def submit1():
 
 
 
-# login
-@app.route('/navbar')
-def navbar():
-    data = get_data()
-    return render_template('navbar.html', data = data)
-
-
 @app.route('/hinzufügen')
 def hinzufügen():
     data = get_data()
@@ -84,7 +73,7 @@ def newsletter():
     data = get_data()
     return render_template('login.html', data = data)
 
-# Forms für Datenbank Anmeldung/ Newsletter
+# Forms für Datenbank Anmeldung/ login
 @app.route('/submit2', methods=['POST','GET'])
 def submit2():
             if request.method == 'POST':
