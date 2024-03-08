@@ -29,28 +29,35 @@ def get_data():
     conn.close()
     return data
 
+
+def connect_db():
+    return sqlite3.connect('database.db')
+
+
 # Verändern main seite für Checkboxes Kalender
 @app.route('/submit1', methods=['POST'])
 def submit1():
-    if request.method == 'POST':
-        fertig = request.form.get('fertig') == 'on'  # Wenn das Kontrollkästchen ausgewählt wurde, wird 'on' gesendet
-        priorisiert = request.form.get('priorisiert') == 'on'
+    conn = connect_db()
+    cursor = conn.cursor()
 
-        # Datenbankverbindung herstellen
-        conn = connect_db()
-        cursor = conn.cursor()
+    for key in request.form:
+        if key.startswith('fertig-') or key.startswith('priorisiert-'):
+            item_id = key.split('-')[1]
+            if 'fertig' in key:
+                fertig_value = 1
+            else:
+                fertig_value = 0
+            if 'priorisiert' in key:
+                priorisiert_value = 1
+            else:
+                priorisiert_value = 0
+            
+#SQL befehl
+            cursor.execute("UPDATE kalender SET Priorisiert = ?, Fertig = ? WHERE ID = ?", (priorisiert_value, fertig_value, item_id))
 
-        # SQL-Befehl zum Aktualisieren der Daten
-        cursor.execute("UPDATE kalender SET Priorisiert = ?, Fertig = ? WHERE ID = ?", (priorisiert, fertig, id))
-
-        # Änderungen in der Datenbank speichern
-        conn.commit()
-
-        # Datenbankverbindung schließen
-        conn.close()
-        
-        print('Änderungen in der Datenbank gespeichert')
-        return redirect('/')
+    conn.commit()
+    conn.close()
+    return redirect('/')
 
 
 
