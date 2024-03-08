@@ -59,6 +59,27 @@ def submit1():
     conn.close()
     return redirect('/')
 
+# Löschen von Datensätzen hauptseite
+
+@app.route('/delete', methods=['POST'])
+def delete_entry():
+    delete_id = request.form.get('delete_id')
+    if delete_id:
+        conn = connect_db()
+        cursor = conn.cursor()
+        
+        # SQL-Befehl zum Löschen des Datensatzes
+        cursor.execute("DELETE FROM kalender WHERE ID = ?", (delete_id,))
+        
+        # Änderungen in der Datenbank speichern
+        conn.commit()
+        
+        # Datenbankverbindung schließen
+        conn.close()
+        
+        print('Datensatz gelöscht')
+    
+    return redirect('/')
 
 
 
