@@ -24,7 +24,7 @@ def index():
 def get_data():
     conn = connect_db()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM kalender")
+    cursor.execute("SELECT * FROM kalender ORDER BY priorisiert DESC")
     data = cursor.fetchall()
     conn.close()
     return data
