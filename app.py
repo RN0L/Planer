@@ -83,12 +83,14 @@ def delete_entry():
 
 
 
-
-
-@app.route('/hinzufügen')
-def hinzufügen():
+# login
+@app.route('/login')
+def newsletter():
     data = get_data()
-    return render_template('hinzufügen.html', data = data)
+    return render_template('login.html', data = data)
+
+
+
 
 
 @app.route('/about')
@@ -98,34 +100,35 @@ def about():
 
 
 
-# login
-@app.route('/login')
-def newsletter():
+
+@app.route('/hinzufügen')
+def hinzufügen():
     data = get_data()
-    return render_template('login.html', data = data)
+    return render_template('hinzufügen.html', data = data)
 
-# Forms für Datenbank Anmeldung/ login
-@app.route('/submit2', methods=['POST','GET'])
+
+# Forms für Datenbank hinzufügem
+@app.route('/submit2', methods=['POST'])
 def submit2():
-            if request.method == 'POST':
-                title = request.form['name']
-                content = request.form['email']
+    if request.method == 'POST':
+        titel = request.form['titel']
+        datum = request.form['datum']
 
-                # Datenbankverbindung herstellen
-                conn = connect_db()
-                cursor = conn.cursor()
+        # Datenbankverbindung herstellen
+        conn = connect_db()
+        cursor = conn.cursor()
 
-                # SQL-Befehl zum Einfügen von Daten
-                cursor.execute("INSERT INTO login (name, passwort) VALUES (?, ?)", ("name", "pAssword"))
+        # SQL-Befehl zum Einfügen von Daten
+        cursor.execute("INSERT INTO kalender (Ereignis, Beschreibung, Priorisiert, Fertig, Datum) VALUES (?, ?, ?, ?, ?)", (titel, "Nicht vorhanden", 0, 0, datum))
 
-                # Änderungen in der Datenbank speichern
-                conn.commit()
+        # Änderungen in der Datenbank speichern
+        conn.commit()
 
-                # Datenbankverbindung schließen
-                conn.close()
-                print(title, content, 'wurden in der Datenbank gespeichert')
-                return redirect('/login')
+        # Datenbankverbindung schließen
+        conn.close()
 
+        print(f"{titel} wurde in der Datenbank gespeichert")
+        return redirect('/hinzufügen')
 
 
 
