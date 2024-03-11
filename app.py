@@ -90,6 +90,10 @@ def newsletter():
     return render_template('login.html', data = data)
 
 
+@app.route('/navbar')
+def navbar():
+    data = get_data()
+    return render_template('navbar.html', data = data)
 
 
 
