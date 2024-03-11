@@ -5,7 +5,7 @@
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     font-style: normal;
-    
+   
 }
 :root{
     --bg-color: #ffffff;
@@ -33,7 +33,7 @@ header{
 .logo{
     display: flex;
     align-items: center;
-
+ 
 }
 .logo i {
     color: var(--main-color);
@@ -61,7 +61,7 @@ header{
 .main{
     display: flex;
     align-items: center;
-
+ 
 }
 .main a{
     margin-right: 25px;
@@ -70,14 +70,14 @@ header{
     font-size: 1.1rem;
     font-weight: 500;
     transition: all .50s ease;
-    
+   
 }
 .user {
     display: flex;
     align-items: center;
     color: var(--text-color);
 }
-
+ 
 .ri-user-fill {
     color: var(--main-color);
     font-size: 28px;
@@ -92,5 +92,8 @@ header{
     cursor: pointer;
     z-index: 10001;
     display: none;
-
+ 
+}
+.Kalender{
+    margin-top: 200px;
 }
