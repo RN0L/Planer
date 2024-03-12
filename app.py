@@ -102,7 +102,10 @@ def about():
     data = get_data()
     return render_template('about.html', data = data)
 
-
+@app.route('/registrieren')
+def registrieren():
+    data = get_data()
+    return render_template('registrieren.html', data = data)
 
 
 @app.route('/hinzufügen')
@@ -111,7 +114,7 @@ def hinzufügen():
     return render_template('hinzufügen.html', data = data)
 
 
-# Forms für Datenbank hinzufügem
+# Forms für Datenbank hinzufügen
 @app.route('/submit2', methods=['POST'])
 def submit2():
     if request.method == 'POST':
