@@ -16,7 +16,7 @@ def connect_db():
 @app.route('/')
 def index():
     data = get_data()
-    return render_template('main.html', data = data)
+    return render_template('login.html', data = data)
 
 # Daten aus der Datenbank abrufen Hauptseite
 def get_data():
@@ -31,7 +31,7 @@ def get_data():
 
 
     # Eintragen Kalender
-    @app.route('/')
+    @app.route('/main')
     def eintragen():
         data = get_data()
         return render_template('main.html', data = data)
@@ -78,11 +78,11 @@ def hinzufügen():
 
 
 
-# login
-@app.route('/login')
+# main
+@app.route('/main')
 def newsletter():
     data = get_data()
-    return render_template('login.html', data = data)
+    return render_template('main.html', data = data)
 
 # Forms für Datenbank Anmeldung/ Newsletter
 @app.route('/submit2', methods=['POST','GET'])
@@ -97,6 +97,31 @@ def submit2():
 
                 # SQL-Befehl zum Einfügen von Daten
                 cursor.execute("INSERT INTO login (name, passwort) VALUES (?, ?)", ("name", "pAssword"))
+
+                # Änderungen in der Datenbank speichern
+                conn.commit()
+
+                # Datenbankverbindung schließen
+                conn.close()
+                print(title, content, 'wurden in der Datenbank gespeichert')
+                return redirect('/login')
+            
+
+
+
+
+@app.route('/submit3', methods=['POST','GET'])
+def submit3():
+            if request.method == 'POST':
+                title = request.form['name']
+                content = request.form['email']
+
+                # Datenbankverbindung herstellen
+                conn = connect_db()
+                cursor = conn.cursor()
+
+                # SQL-Befehl zum Einfügen von Daten
+                cursor.execute("DELETE FROM kalender WHERE iD=?", (1))
 
                 # Änderungen in der Datenbank speichern
                 conn.commit()
