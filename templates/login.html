@@ -164,7 +164,25 @@ header{
 </header>
  
 <body>
-    
+    def login():
+    if request.method == 'POST':
+        Benutzername = request.form['username']
+        Passwort = request.form['password']
+
+        conn = connect_db()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users WHERE Benutzername = ? AND Passwort = ?", (Benutzername, hashlib.md5(password.encode()).hexdigest()))
+        user = cursor.fetchone()
+        conn.close()
+
+        if user:
+            session['user_id'] = user[0]
+            return redirect('/')
+        else:
+            return render_template('login.html', error="Invalid Benutzername or Passwort")
+
+    return render_template('login.html', error="")
+
     <div id="container">
         <div id="image-container">
             <img src="static/images/logo.png">
