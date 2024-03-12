@@ -160,6 +160,19 @@ header{
 </header>
  
 <body>
+    <div id="container">
+        <div id="image-container">
+            <img src="static/images/logo.png">
+        </div>
+        <h3>Benutzername</h3>
+        <!-- <input type="checkbox" class="checkbox"> -->
+        <input type="text" name="content" placeholder="Benutzername">
+        <br> <br>
+        <h3>Passwort</h3>
+        <input type="password" name="content" placeholder="Passwort">
+        <h4><button type="submit" id="berechnen"><a href="/" target="_blank">Einloggen</a></button></h4>
+    </div>
+
     def login():
     if request.method == 'POST':
         Benutzername = request.form['username']
@@ -179,19 +192,6 @@ header{
 
     return render_template('login.html', error="")
 
-    <div id="container">
-        <div id="image-container">
-            <img src="static/images/logo.png">
-        </div>
-        <h3>Benutzername</h3>
-        <!-- <input type="checkbox" class="checkbox"> -->
-        <input type="text" name="content" placeholder="Benutzername">
-        <br> <br>
-        <h3>Passwort</h3>
-        <input type="password" name="content" placeholder="Passwort">
-        <h4><button type="submit" id="berechnen"><a href="/" target="_blank">Einloggen</a></button></h4>
-    </div>
-    
 </body>
  
 </html>
