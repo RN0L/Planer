@@ -88,17 +88,6 @@ def delete_entry():
 def newsletter():
     data = get_data()
     return render_template('login.html', data = data)
-def authenticate_user(username, password):
-    conn = connect_db()
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
-    user = cursor.fetchone()
-    conn.close()
-    if user:
-        hashed_password = hashlib.sha256(password.encode()).hexdigest()
-        if user[2] == hashed_password:
-            return user
-    return None
 
 # Anmelde-Endpunkt
 @app.route('/login', methods=['POST'])
