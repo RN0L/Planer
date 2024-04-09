@@ -2,13 +2,11 @@
 <html>
  
     <head>
-        <meta charset="utf-8">
         <title>Planer</title>
         <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.css') }}">
         <title>login</title>
     </head>
 <body>
-
     <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
@@ -37,149 +35,24 @@
           </div>
         </div>
     </nav>
-    <style>
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        
-        
-
-<!-- <header>
-    <style>
-        * {
-    padding: 0;
-    margin:  0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
-    font-style: normal;
+    <br><br>
     
-}
-:root{
-    --bg-color: #ffffff;
-    --text-color: rgb(0, 0, 0);
-    --main-color: #28a1b6;
-}
-body{
-    min-height: 100vh;
-    background: var(--bg-color);
-    color: var(--text-color);
-}
-header{
-    position: fixed;
-    width: 100%;
-    top:   0;
-    right: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: transparent;
-    padding: 28px 12%;
-    transition: all .50s ease;
-}
-.logo{
-    display: flex;
-    align-items: center;
-
-}
-.logo i {
-    color: var(--main-color);
-    font-size: 70px;
-    margin-right: 10px;
-}
-.navbar{
-    display: flex;
-    list-style: none;
-}
-.navbar a{
-    color: var(--text-color);
-    font-size: 1.1rem;
-    font-weight: 500;
-    padding: 5px 20;
-    margin: 5px 30px;
-    transition: all .50s ease;
-}
-.navbar a:hover{
-    color: var(--main-color);
-}
-.navbar a.active{
-    color: var(--main-color);
-}
-.main{
-    display: flex;
-    align-items: center;
-
-}
-.main a{
-    margin-right: 25px;
-    margin-left: 10px;
-    color: var(--text-color);
-    font-size: 1.1rem;
-    font-weight: 500;
-    transition: all .50s ease;
-    
-}
-.user {
-    display: flex;
-    align-items: center;
-    color: var(--text-color);
-}
-
-.ri-user-fill {
-    color: var(--main-color);
-    font-size: 28px;
-    margin-right: 7px;
-}
-.main a:hover{
-    color: var(--main-color);
-}
-#menu-icon{
-    font-size: 35px;
-    color: var(--text-color);
-    cursor: pointer;
-    z-index: 10001;
-    display: none;
-
-}
-
-
-
- </style>
-   
-    <a href="#" class="logo"><i class="ri-home-smile-fill"></i>
-        <img src="static/images/logo.png" alt="Logo" width="400px" >
-    </a>
-
-    <ul class="navbar">
-        <li><a href="/registrieren" target="_blank">registrieren</a></li>
-    </ul>
-
-
-</header>
--->
-
-
-
-
-
-<body>
-    <div id="container">
-        <div id="image-container">
-            <img src="static/images/logo.png">
-        </div>
-        <h3>Benutzername</h3>
-        <!-- <input type="checkbox" class="checkbox"> -->
-        <input type="text" name="content" placeholder="Benutzername">
-        <br> <br>
-        <h3>Passwort</h3>
-        <input type="password" name="content" placeholder="Passwort">
-        <h4><button type="submit" id="berechnen"><a href="/" target="_blank">Einloggen</a></button></h4>
-    </div>
-
+    <form>
+        <fieldset>
+          <legend>Legend</legend>
+          <div>
+            <label for="exampleInputEmail1" class="form-label mt-4">Username</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Dein scheiss Name">
+          </div>
+          <div>
+            <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" autocomplete="off">
+            <small id="emailHelp" class="form-text text-muted">Das Passwort ist mit SQL injection leicht auszulesen</small>
+          </div>
+          <br><br>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </fieldset>
+      </form>
 
 
 </body>
