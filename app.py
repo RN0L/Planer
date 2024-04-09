@@ -88,6 +88,40 @@ def delete_entry():
 def newsletter():
     data = get_data()
     return render_template('login.html', data = data)
+def authenticate_user(username, password):
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+    user = cursor.fetchone()
+    conn.close()
+    if user:
+        hashed_password = hashlib.sha256(password.encode()).hexdigest()
+        if user[2] == hashed_password:
+            return user
+    return None
+
+# Anmelde-Endpunkt
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.form['username']
+    password = request.form['password']
+    user = authenticate_user(username, password)
+    if user:
+        session['user_id'] = user[0]  # Benutzer-ID in der Session speichern
+        return redirect('/dashboard')  # Weiterleitung zur Dashboard-Seite nach erfolgreichem Login
+    else:
+        return render_template('login.html', error="Invalid username or password")
+
+# Dashboard-Seite nach dem Einloggen
+@app.route('/dashboard')
+def dashboard():
+    if 'user_id' in session:
+        return render_template('dashboard.html')
+    else:
+        return redirect('/login')
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 
 @app.route('/navbar')
