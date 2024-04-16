@@ -18,8 +18,17 @@ def index():
     if request.method == 'POST':
          prio=request.form['priorisiert']
     data = get_data()
-    return render_template('main.html', data = data)
+    return render_template('main.html', data = data, name = benutzername )
  
+def benutzername():
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT name FROM login")
+    data = cursor.fetchall()
+    conn.close()
+    return data
+
+
 # Daten aus der Datenbank abrufen Hauptseite Kalender tabelle
 def get_data():
     conn = connect_db()
@@ -135,29 +144,6 @@ def submit2():
                 conn.close()
                 print(title, content, 'wurden in der Datenbank gespeichert')
                 return redirect('/login')
-
-
-
-@app.route('/submit3', methods=['GET'])
-def submit2():
-            if request.method == 'GET':
-                title = request.form['name']
-                content = request.form['email']
-
-                # Datenbankverbindung herstellen
-                conn = connect_db()
-                cursor = conn.cursor()
-
-                # SQL-Befehl
-                cursor.execute("SELECT 'name' FROM login")
-
-                # Änderungen in der Datenbank speichern
-                conn.commit()
-
-                # Datenbankverbindung schließen
-                conn.close()
-                return redirect('/login')
-
 
 
 
