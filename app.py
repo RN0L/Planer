@@ -1,91 +1,121 @@
 from flask import Flask, render_template, request, redirect
 import sqlite3
-
+ 
 app = Flask(__name__)
-
+ 
 # Verbindung zur Datenbank herstellen
 def connect_db():
     conn = sqlite3.connect('database.db')
     return conn
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
 # Hauptseite Kalender
-@app.route('/')
+@app.route('/',methods=['POST','GET'])
 def index():
+    if request.method == 'POST':
+         prio=request.form['priorisiert']
     data = get_data()
-    return render_template('login.html', data = data)
-
-# Daten aus der Datenbank abrufen Hauptseite
+    return render_template('main.html', data = data)
+ 
+# Daten aus der Datenbank abrufen Hauptseite Kalender tabelle
 def get_data():
     conn = connect_db()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM kalender")
+    cursor.execute("SELECT * FROM kalender ORDER BY priorisiert DESC")
     data = cursor.fetchall()
     conn.close()
     return data
-
-
-
-
-    # Eintragen Kalender
-    @app.route('/main')
-    def eintragen():
-        data = get_data()
-        return render_template('main.html', data = data)
-
-    # Forms für Datenbank Eintragen Kalender
-    @app.route('/submit1', methods=['POST','GET'])
-    def submit1():
-            if request.method == 'POST':
-                title = request.form['name']
-                content = request.form['email']
-
-                # Datenbankverbindung herstellen
-                conn = connect_db()
-                cursor = conn.cursor()
-
-                # SQL-Befehl zum Einfügen von Daten
-                cursor.execute("INSERT INTO kalender (Ereignis, Beschreinung, Priorisiert, Fertig, Datum) VALUES (?, ?, ?, ?, ?)", (ereignis, beschreibung, priorisiert, fertig, datum))
-
-                # Änderungen in der Datenbank speichern
-                conn.commit()
-
-                # Datenbankverbindung schließen
-                conn.close()
-                print(title, content, 'wurden in der Datenbank gespeichert')
-                return redirect('/')
-
-
-
-
+ 
+ 
+def connect_db():
+    return sqlite3.connect('database.db')
+ 
+ 
+# Verändern main seite für Checkboxes Kalender
+@app.route('/submit1', methods=['POST'])
+def submit1():
+    conn = connect_db()
+    cursor = conn.cursor()
+ 
+    for key in request.form:
+        if key.startswith('fertig-') or key.startswith('priorisiert-'):
+            item_id = key.split('-')[1]
+            if 'fertig' in key:
+                fertig_value = 1
+            else:
+                fertig_value = 0
+            if 'priorisiert' in key:
+                priorisiert_value = 1
+            else:
+                priorisiert_value = 0
+           
+#SQL befehl
+            cursor.execute("UPDATE kalender SET Priorisiert = ?, Fertig = ? WHERE ID = ?", (priorisiert_value, fertig_value, item_id))
+ 
+    conn.commit()
+    conn.close()
+    return redirect('/')
+ 
+# Löschen von Datensätzen hauptseite
+ 
+@app.route('/delete', methods=['POST'])
+def delete_entry():
+    delete_id = request.form.get('delete_id')
+    if delete_id:
+        conn = connect_db()
+        cursor = conn.cursor()
+       
+        # SQL-Befehl zum Löschen des Datensatzes
+        cursor.execute("DELETE FROM kalender WHERE ID = ?", (delete_id,))
+       
+        # Änderungen in der Datenbank speichern
+        conn.commit()
+       
+        # Datenbankverbindung schließen
+        conn.close()
+       
+        print('Datensatz gelöscht')
+   
+    return redirect('/')
+ 
+ 
+ 
 # login
+@app.route('/login')
+def newsletter():
+    data = get_data()
+    return render_template('login.html', data = data)
+ 
+ 
 @app.route('/navbar')
 def navbar():
     data = get_data()
     return render_template('navbar.html', data = data)
-
-
+ 
+ 
+ 
+@app.route('/about')
+def about():
+    data = get_data()
+    return render_template('about.html', data = data)
+ 
+@app.route('/registrieren')
+def registrieren():
+    data = get_data()
+    return render_template('registrieren.html', data = data)
+ 
+ 
 @app.route('/hinzufügen')
 def hinzufügen():
     data = get_data()
     return render_template('hinzufügen.html', data = data)
-
-
-
-
-
-
-# main
-@app.route('/main')
-def newsletter():
-    data = get_data()
-    return render_template('main.html', data = data)
-
-# Forms für Datenbank Anmeldung/ Newsletter
-@app.route('/submit2', methods=['POST','GET'])
+ 
+ 
+# Forms für Datenbank hinzufügen
+@app.route('/submit2', methods=['POST'])
 def submit2():
             if request.method == 'POST':
                 title = request.form['name']
@@ -105,14 +135,12 @@ def submit2():
                 conn.close()
                 print(title, content, 'wurden in der Datenbank gespeichert')
                 return redirect('/login')
-            
 
 
 
-
-@app.route('/submit3', methods=['POST','GET'])
-def submit3():
-            if request.method == 'POST':
+@app.route('/submit3', methods=['GET'])
+def submit2():
+            if request.method == 'GET':
                 title = request.form['name']
                 content = request.form['email']
 
@@ -120,17 +148,15 @@ def submit3():
                 conn = connect_db()
                 cursor = conn.cursor()
 
-                # SQL-Befehl zum Einfügen von Daten
-                cursor.execute("DELETE FROM kalender WHERE iD=?", (1))
+                # SQL-Befehl
+                cursor.execute("SELECT 'name' FROM login")
 
                 # Änderungen in der Datenbank speichern
                 conn.commit()
 
                 # Datenbankverbindung schließen
                 conn.close()
-                print(title, content, 'wurden in der Datenbank gespeichert')
                 return redirect('/login')
-
 
 
 

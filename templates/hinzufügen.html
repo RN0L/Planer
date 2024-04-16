@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.css') }}">
+
     <title>Personal Planer - Login</title>
     <style>
     body {
@@ -11,7 +13,7 @@
         padding: 0;
         font-family: Arial, sans-serif;
         background-color: #ffffff;
-        font-size: 16px;
+        font-size: 26px;
     }
     
     .container {
@@ -29,8 +31,7 @@
     .form-group {
 
         margin-bottom: 15px;
-        
-=======
+
         margin-bottom: 25px;
 
     }
@@ -46,13 +47,13 @@
     }
     
     button {
-        background-color: #007bff;
+        background-color: #28a1b6;
         color: rgb(255, 255, 255);
         cursor: pointer;
     }
     
     button:hover {
-        background-color: #0056b3;
+        background-color: #28a1b6;
     }
     
     input[type="text"]:focus,
@@ -76,7 +77,7 @@
 :root{
     --bg-color: #ffffff;
     --text-color: rgb(0, 0, 0);
-    --main-color: #29fd53;
+    --main-color: #28a1b6;
 }
 body{
     min-height: 100vh;
@@ -166,38 +167,37 @@ header{
  </style>
    
     <a href="#" class="logo"><i class="ri-home-smile-fill"></i>
-        <img src="Logo.JPG" alt="Logo" width="400px" >
+        <img src="static/images/logo.png" alt="Logo" width="400px" >
     </a>
 
     <ul class="navbar">
-        <li><a href="#" class="active">Home</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Service</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="/hinzufügen" target="_blank">Hinzufügen</a></li>
+
+        <li><a href="/about" target="_blank">Impressum</a></li>
+        <li><a href="/" target="_blank">Planer</a></li>
+        <li><a href="/login" target="_blank">Login</a></li>
+        <li class="nav-item">
+            <a class="nav-link" href="registrieren">Registrieren</a>
     </ul>
 
- 
+
 </header>
 <body>
     <div class="container">
         <h1>Neue Aufgabe hinzufügen</h1>
-        <form>
+        <form action="/submit2" method="post">
             <div class="form-group">
-                <label for="Titel"><b>Titel</b></label>
-                <input type="text" placeholder="Titel des Eintrags eingeben" required> <br>
+                <label for="titel"><b>Titel</b></label>
+                <input type="text" name="titel" placeholder="Titel des Eintrags eingeben" required> <br>
             </div>
             <div class="form-group">
-                <label for="Content"><b>Content</b></label>
-                <input type="text" placeholder="genauere Informationen"> <br>
-            </div>
-            <div class="form-group">
-                <label for="Datum"><b>Datum</b></label>
-                <input type="date" required> <br>
+                <label for="datum"><b>Fälligkeitsdatum</b></label>
+                <input type="date" name="datum" required> <br>
             </div>
             <button type="submit">Hinzufügen</button>
         </form>
     </div>
 </body>
+
 </html>
 
