@@ -1,24 +1,66 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zentriertes Foto</title>
-<link rel="stylesheet" href="styles.css">
+<title>Registrieren</title>
+<link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.css') }}">
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+            <img src="static/images/Logo.png" alt="Logo" style="height: 40px;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Registrieren
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">Impressum</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
 <div class="container">
   <div class="image-container">
     <img src="static/images/registrierenSeiteBild.png" alt="Dein Bild">
   </div>
 </div>
+<form>
+  <fieldset class="text-center">
+    <legend>Jetzt registrieren!</legend>
+    <div>
+      <label for="exampleInputEmail1" class="form-label mt-4">Username</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Benutzername">
+    </div>
+    <div>
+      <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Passwort" autocomplete="off">
+      <small id="emailHelp" class="form-text text-muted">Das Passwort ist mit SQL injection leicht auszulesen</small>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </fieldset>
+</form>
 </body>
 </html>
 <style>
 body, html {
     margin: 0;
     padding: 0;
-    height: 100%;
+    height: 85%;
 }
   
 .container {
@@ -33,7 +75,7 @@ body, html {
 }
   
 .image-container img {
-    max-width: 25%;
+    max-width: 45%;
     max-height: 60%;
     display: block;
     margin: 0 auto;
