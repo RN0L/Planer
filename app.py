@@ -15,16 +15,17 @@ def connect_db():
 # Hauptseite Kalender
 @app.route('/',methods=['POST','GET'])
 def index():
+    global benutzername
     if request.method == 'POST':
          prio=request.form['priorisiert']
-    data = get_data()
+    data = get_data(benutzername)
     return render_template('main.html', data = data)
  
 # Daten aus der Datenbank abrufen Hauptseite Kalender tabelle
-def get_data():
+def get_data(benutzername):
     conn = connect_db()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM kalender ORDER BY priorisiert DESC")
+    cursor.execute(f"SELECT * FROM kalender WHERE Benutzername='{benutzername}' ORDER BY priorisiert DESC;")
     data = cursor.fetchall()
     conn.close()
     return data
@@ -84,34 +85,50 @@ def delete_entry():
  
  
 # login
-@app.route('/login')
-def newsletter():
-    data = get_data()
-    return render_template('login.html', data = data)
+@app.route('/login', methods=['GET','POST'])
+def login():
+    global benutzername
+    if request.method == 'POST':
+        benutzername = request.form['Benutzername']
+        passwort = request.form['Passwort']
+
+        conn = connect_db()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM login")
+        data = cursor.fetchall()
+
+        for user in data:
+            if benutzername == user[1]:
+                print(benutzername)
+                print(passwort)
+                print(user[2])
+                if passwort == user[2]:
+                    return redirect('/')
+                    
+                else:  
+                     print("Passwort falsch")
+        conn.close()
+    return render_template('login.html')
  
  
 @app.route('/navbar')
 def navbar():
-    data = get_data()
-    return render_template('navbar.html', data = data)
+    return render_template('navbar.html')
  
  
  
 @app.route('/about')
 def about():
-    data = get_data()
-    return render_template('about.html', data = data)
+    return render_template('about.html')
  
 @app.route('/registrieren')
 def registrieren():
-    data = get_data()
-    return render_template('registrieren.html', data = data)
+    return render_template('registrieren.html')
  
  
 @app.route('/hinzufügen')
 def hinzufügen():
-    data = get_data()
-    return render_template('hinzufügen.html', data = data)
+    return render_template('hinzufügen.html')
  
  
 # Forms für Datenbank hinzufügen

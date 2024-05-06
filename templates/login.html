@@ -34,16 +34,16 @@
     </nav>
     <br><br>
    
-    <form>
+    <form method="post">
         <fieldset class="text-center">
           <legend>Login</legend>
           <div>
             <label for="exampleInputEmail1" class="form-label mt-4">Username</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Benutzername">
+            <input type="text" class="form-control" name="Benutzername" aria-describedby="emailHelp" placeholder="Benutzername">
           </div>
           <div>
             <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Passwort" autocomplete="off">
+            <input type="password" class="form-control" name="Passwort" placeholder="Passwort" autocomplete="off">
             <small id="emailHelp" class="form-text text-muted">Das Passwort ist mit SQL injection leicht auszulesen</small>
           </div>
           <br>
